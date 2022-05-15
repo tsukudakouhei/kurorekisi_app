@@ -1,0 +1,12 @@
+<h1>投稿内容詳細</h1>
+<p>投稿日:<%= @post.created_at.in_time_zone('Tokyo') %></p>
+<img src="<%= "/user_images/#{@user.image_name}" %>"><br>
+<%= link_to(@user.name, "/users/#{@user.id}")%>
+<h2>投稿内容</h2>
+<%= @post.content %>
+<br>
+<% if @post.user_id == @current_user.id %>
+  <%= link_to("編集","/posts/#{@post.id}/edit") %>
+  <%= link_to("削除","/posts/#{@post.id}/destroy",{method: "post",}) %>
+<% end %>
+

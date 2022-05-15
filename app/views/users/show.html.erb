@@ -1,0 +1,18 @@
+<h1>ユーザ詳細ページ</h1>
+<div class="user">
+  <img src="<%= "/user_images/#{@user.image_name}" %>">
+</div>
+<p><%= @user.name %></p>
+<p><%= @user.email %></p>
+<% if @user.id == @current_user.id %>
+  <%= link_to("編集","/users/#{@user.id}/edit") %>
+<% end %>
+
+<% @user.posts.each do |post| %>
+  <li>
+    <img src="<%= "/user_images/#{post.user.image_name}" %>"><br>
+    <%= link_to(post.user.name,"/users/#{post.user.id}") %><br>
+    <p>投稿</p>
+    <%= link_to(post.content,"/posts/#{post.id}") %>
+  </li>
+<% end %>

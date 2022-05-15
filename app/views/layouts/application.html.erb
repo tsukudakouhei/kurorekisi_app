@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
-    <title>KurorekisiApp</title>
+    <title>幼少期の黒歴史投稿App</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +13,27 @@
   </head>
 
   <body>
+    <header>
+      <div class="header-logo">
+        <li><%= link_to("幼少期の黒歴史投稿App", "/") %></li>
+      </div>
+
+      <ul class="header-menus">
+      <% if @current_user %>
+        <li>ユーザ名: <%= link_to(@current_user.name, "/users/#{@current_user.id}") %></li>
+        <li><%= link_to("黒歴史投稿一覧", "/posts/index") %></li>
+        <li><%= link_to("投稿作成", "/posts/new") %></li>
+        <li><%= link_to("ユーザ一覧", "/users/index") %></i>
+        <li><%= link_to("ログアウト", "/logout", {method: "post"}) %></li>
+      <% else %>
+         <li><%= link_to("ユーザ作成", "/signup") %></li>
+         <li><%= link_to("ログイン", "/login") %></li>
+      <% end %>    
+      </ul>
+    </header>
+    <% if flash[:notice] %>
+      <%= flash[:notice] %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
